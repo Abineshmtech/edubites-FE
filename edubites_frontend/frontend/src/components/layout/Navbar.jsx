@@ -6,6 +6,11 @@ export default function Navbar({ onMenuClick }) {
   const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login", { replace: true });
+  };
+
   return (
     <header className="sticky top-0 h-16 bg-white border-b border-gray-200 shadow-sm z-30 flex items-center justify-between px-4 lg:px-8">
       <button
@@ -34,6 +39,12 @@ export default function Navbar({ onMenuClick }) {
             <MdPerson className="w-5 h-5 text-gray-600" />
           </div>
           <span className="hidden sm:inline text-sm font-medium text-gray-700">Student</span>
+        </button>
+        <button
+          onClick={handleLogout}
+          className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-edubites-sky text-white text-sm font-medium hover:bg-edubites-sky/90"
+        >
+          <span>Logout</span>
         </button>
       </div>
     </header>

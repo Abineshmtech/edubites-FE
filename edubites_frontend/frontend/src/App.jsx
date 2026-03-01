@@ -11,6 +11,20 @@ const Canteen = lazy(() => import("./pages/Canteen"));
 const OrderHistory = lazy(() => import("./pages/OrderHistory"));
 const PadRequest = lazy(() => import("./pages/PadRequest"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+
+function ProtectedRoute({ children }) {
+  const isLoggedIn =
+    typeof window !== "undefined" &&
+    localStorage.getItem("isLoggedIn") === "true";
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   return (
@@ -29,7 +43,16 @@ function App() {
       />
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><LoadingSpinner size="lg" /></div>}>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <MainLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="events" element={<Events />} />
             <Route path="library" element={<Library />} />
