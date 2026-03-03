@@ -13,6 +13,7 @@ const PadRequest = lazy(() => import("./pages/PadRequest"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
+const Checkout = lazy(() => import("./pages/Checkout"));
 
 function ProtectedRoute({ children }) {
   const isLoggedIn =
@@ -59,6 +60,7 @@ function App() {
             <Route path="canteen" element={<Canteen />} />
             <Route path="order-history" element={<OrderHistory />} />
             <Route path="pad-request" element={<PadRequest />} />
+            <Route path="checkout" element={<Checkout />} />
             <Route path="admin" element={<AdminPanel />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

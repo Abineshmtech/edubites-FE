@@ -15,7 +15,11 @@ const statusVariants = {
 export default function OrderHistoryPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [orders, setOrders] = useState(orderHistory);
+  // initialize with built-in dummy data plus any orders saved by checkout
+  const [orders, setOrders] = useState(() => {
+    const saved = JSON.parse(localStorage.getItem("orders") || "[]");
+    return [...orderHistory, ...saved];
+  });
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch = order.items.some((i) =>

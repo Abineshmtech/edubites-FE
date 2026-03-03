@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdEvent, MdMenuBook, MdReceiptLong, MdHealing } from "react-icons/md";
 import toast from "react-hot-toast";
@@ -23,7 +23,14 @@ const statCards = [
 export default function Dashboard() {
   const navigate = useNavigate();
   const [stats] = useState(statsData);
+const [courses, setCourses] = useState([]);
 
+useEffect(() => {
+  fetch("http://127.0.0.1:8000/api/courses/")
+    .then(res => res.json())
+    .then(data => setCourses(data))
+    .catch(err => console.error(err));
+}, []);
   const today = new Date().toLocaleDateString("en-IN", {
     weekday: "long",
     year: "numeric",
