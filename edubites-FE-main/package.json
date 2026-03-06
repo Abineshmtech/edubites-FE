@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "vite --config edubites_frontend/frontend/vite.config.js",
+    "build": "vite build --config edubites_frontend/frontend/vite.config.js",
+    "preview": "vite preview --config edubites_frontend/frontend/vite.config.js"
+  },
+  "dependencies": {
+    "vite": "^7.3.1"
+  }
+}
